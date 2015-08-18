@@ -61,6 +61,38 @@ class InfoString extends Attr {
 }
 
 
+class Attributes extends Attr {
+  String identifier;
+  List<String> classes;
+  Map<String, String> attributes;
+
+  Attributes(this.identifier, this.classes, this.attributes);
+  String toString() {
+    List<String> res = <String>[];
+    if (identifier != null) {
+      res.add('#' + identifier);
+    }
+    if (classes != null) {
+      classes.forEach((el) {
+        res.add('.' + el);
+      });
+    }
+    attributes.forEach((key, value) {
+      res.add(key + '=' + value);
+    });
+
+    return 'Attributes(${res.join(' ')})';
+  }
+
+  bool operator== (obj) => obj is Attributes &&
+    identifier == obj.identifier &&
+    _iterableEquality.equals(classes, obj.classes) &&
+    _mapEquality.equals(attributes, obj.attributes);
+
+  int get hashCode => hash3(identifier, classes, attributes);
+}
+
+
 // TODO link type: with or without <>
 // TODO title delimiters ", ' or ()
 class Target {

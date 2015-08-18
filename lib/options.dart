@@ -14,6 +14,9 @@ typedef Target LinkResolver(String normalizedReference, String reference);
 Target defaultLinkResolver(String normalizedReference, String reference) => null;
 
 class Options {
+  final bool fencedCodeAttributes;
+  final bool headerAttributes;
+  final bool inlineCodeAttributes;
   final bool smartPunctuation;
   final bool strikeout;
   final bool subscript;
@@ -21,6 +24,9 @@ class Options {
   final LinkResolver linkResolver;
 
   const Options({
+          this.fencedCodeAttributes: false,
+          this.headerAttributes: false,
+          this.inlineCodeAttributes: false,
           this.smartPunctuation: false,
           this.strikeout: false,
           this.subscript: false,
@@ -33,10 +39,14 @@ class Options {
   );
 
   static const Options defaults = const Options(
+      fencedCodeAttributes: true,
+      headerAttributes: true,
+      inlineCodeAttributes: true,
       smartPunctuation: true,
       strikeout: true,
       subscript: true,
-      superscript: true);
+      superscript: true
+  );
 
   static const Options strict = const Options();
 }

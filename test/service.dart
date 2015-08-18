@@ -77,6 +77,23 @@ void serviceTests() {
       });
     });
 
+    t.group('Attributes', () {
+      var attr = new Attributes('dart', ['class1', 'class2'],
+        {'key1': 'value1', 'key2': 'value2'});
+      t.test('toString', () {
+        t.expect(attr.toString(), t.equals('Attributes(#dart .class1 .class2 key1=value1 key2=value2)'));
+      });
+      t.test('==', () {
+        t.expect(attr, t.equals(new Attributes('dart', ['class1', 'class2'],
+          {'key1': 'value1', 'key2': 'value2'})));
+      });
+      t.test('!=', () {
+        t.expect(attr, t.isNot(t.equals(new Attributes('html', ['class1', 'class2'],
+          {'key1': 'value1', 'key2': 'value2'}))));
+        t.expect(attr, t.isNot(t.equals(new EmptyAttr())));
+      });
+    });
+
     // Target
     t.group('Target', () {
       var target = new Target('https://www.dartlang.org/', 'Dart');
